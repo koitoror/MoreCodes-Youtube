@@ -6,11 +6,16 @@ from flask_cors import CORS
 from flask_bcrypt import Bcrypt 
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token
+import os
 
 app = Flask(__name__)
 
-app.config['MONGO_DBNAME'] = 'vueloginreg'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/vueloginreg'
+app.config['MONGO_DBNAME'] = os.environ.get('MONGO_DBNAME')
+app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
+
+# app.config['MONGO_DBNAME'] = 'vueloginreg'
+# app.config['MONGO_URI'] = 'mongodb://localhost:27017/vueloginreg'
+# app.config['MONGO_URI'] = 'mongodb+srv://xxxx:passxxxx@cluster0-hcxxx.mongodb.net/vueloginreg?retryWrites=true&w=majority'
 app.config['JWT_SECRET_KEY'] = 'secret'
 
 mongo = PyMongo(app)
